@@ -1,0 +1,103 @@
+digraph DER {
+  graph [rankdir=LR, splines=polyline, nodesep=0.5, ranksep=0.9, fontname="Helvetica", bgcolor="white", pad=0.3];
+  node  [shape=plain, fontname="Helvetica", fontsize=10];
+  edge  [fontname="Helvetica", fontsize=9, color="#4a5568", arrowsize=0.8];
+
+  grupos_usuarios [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#1f6feb"><font color="white"><b>grupos_usuarios</b></font></td></tr>
+   <tr><td align="left">PK id_grupo CHAR(3)</td></tr>
+   <tr><td align="left">nome VARCHAR(40) UQ</td></tr>
+   <tr><td align="left">descricao VARCHAR(200)</td></tr>
+   <tr><td align="left">nivel_acesso TINYINT</td></tr></table>>];
+
+  usuarios [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#1f6feb"><font color="white"><b>usuarios</b></font></td></tr>
+   <tr><td align="left">PK id_usuario VARCHAR(12)</td></tr>
+   <tr><td align="left">nome VARCHAR(100)</td></tr>
+   <tr><td align="left">login VARCHAR(30) UQ</td></tr>
+   <tr><td align="left">email VARCHAR(100) UQ</td></tr>
+   <tr><td align="left">senha_hash CHAR(64)</td></tr>
+   <tr><td align="left">FK id_grupo CHAR(3)</td></tr>
+   <tr><td align="left">ativo, criado_em, ultimo_acesso</td></tr></table>>];
+
+  aluno [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#1a7f37"><font color="white"><b>aluno</b></font></td></tr>
+   <tr><td align="left">PK id_aluno VARCHAR(12)</td></tr>
+   <tr><td align="left">FK id_usuario VARCHAR(12) UQ</td></tr>
+   <tr><td align="left">nome VARCHAR(100)</td></tr>
+   <tr><td align="left">cpf VARCHAR(14) UQ</td></tr>
+   <tr><td align="left">telefone, email</td></tr>
+   <tr><td align="left">data_nascimento, criado_em</td></tr></table>>];
+
+  professor [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#1a7f37"><font color="white"><b>professor</b></font></td></tr>
+   <tr><td align="left">PK id_professor VARCHAR(12)</td></tr>
+   <tr><td align="left">nome VARCHAR(100)</td></tr>
+   <tr><td align="left">telefone VARCHAR(20)</td></tr>
+   <tr><td align="left">cref VARCHAR(20) UQ</td></tr>
+   <tr><td align="left">ativo</td></tr></table>>];
+
+  modalidade [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#1a7f37"><font color="white"><b>modalidade</b></font></td></tr>
+   <tr><td align="left">PK id_modalidade INT AI</td></tr>
+   <tr><td align="left">nome VARCHAR(60) UQ</td></tr>
+   <tr><td align="left">descricao VARCHAR(200)</td></tr>
+   <tr><td align="left">valor_mensal DECIMAL(8,2)</td></tr>
+   <tr><td align="left">ativa</td></tr></table>>];
+
+  plano [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#1a7f37"><font color="white"><b>plano</b></font></td></tr>
+   <tr><td align="left">PK id_plano INT AI</td></tr>
+   <tr><td align="left">nome VARCHAR(60) UQ</td></tr>
+   <tr><td align="left">duracao_meses TINYINT</td></tr>
+   <tr><td align="left">desconto_percentual DECIMAL(5,2)</td></tr></table>>];
+
+  matricula [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#b35900"><font color="white"><b>matricula</b></font></td></tr>
+   <tr><td align="left">PK id_matricula VARCHAR(16)</td></tr>
+   <tr><td align="left">FK id_aluno VARCHAR(12)</td></tr>
+   <tr><td align="left">FK id_plano INT</td></tr>
+   <tr><td align="left">FK id_modalidade INT</td></tr>
+   <tr><td align="left">FK id_professor VARCHAR(12)</td></tr>
+   <tr><td align="left">data_inicio, data_vencimento DATE</td></tr>
+   <tr><td align="left">valor_mensal DECIMAL(8,2)</td></tr>
+   <tr><td align="left">situacao ENUM</td></tr>
+   <tr><td align="left">FK criado_por, criado_em</td></tr></table>>];
+
+  pagamento [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#b35900"><font color="white"><b>pagamento</b></font></td></tr>
+   <tr><td align="left">PK id_pagamento VARCHAR(20)</td></tr>
+   <tr><td align="left">FK id_matricula VARCHAR(16)</td></tr>
+   <tr><td align="left">valor DECIMAL(10,2)</td></tr>
+   <tr><td align="left">forma ENUM</td></tr>
+   <tr><td align="left">meses_pagos TINYINT</td></tr>
+   <tr><td align="left">data_pagamento DATETIME</td></tr>
+   <tr><td align="left">FK registrado_por</td></tr></table>>];
+
+  log_auditoria [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#5d6b7a"><font color="white"><b>log_auditoria</b></font></td></tr>
+   <tr><td align="left">PK id_log BIGINT AI</td></tr>
+   <tr><td align="left">tabela, operacao, id_registro</td></tr>
+   <tr><td align="left">detalhes VARCHAR(500)</td></tr>
+   <tr><td align="left">usuario_banco, usuario_app</td></tr>
+   <tr><td align="left">data_hora DATETIME</td></tr></table>>];
+
+  sequencia_id [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#5d6b7a"><font color="white"><b>sequencia_id</b></font></td></tr>
+   <tr><td align="left">PK entidade VARCHAR(30)</td></tr>
+   <tr><td align="left">prefixo VARCHAR(5)</td></tr>
+   <tr><td align="left">ultimo_valor INT</td></tr></table>>];
+
+  grupos_usuarios -> usuarios  [label="1 : N", arrowhead=crow, arrowtail=tee, dir=both];
+  usuarios  -> aluno           [label="1 : 0..1", arrowhead=teeodot, arrowtail=tee, dir=both];
+  aluno     -> matricula       [label="1 : N", arrowhead=crow, arrowtail=tee, dir=both];
+  plano     -> matricula       [label="1 : N", arrowhead=crow, arrowtail=tee, dir=both];
+  modalidade-> matricula       [label="1 : N", arrowhead=crow, arrowtail=tee, dir=both];
+  professor -> matricula       [label="1 : N", arrowhead=crow, arrowtail=tee, dir=both];
+  usuarios  -> matricula       [label="criado_por", arrowhead=crowodot, arrowtail=teeodot, dir=both, style=dashed];
+  matricula -> pagamento       [label="1 : N", arrowhead=crow, arrowtail=tee, dir=both];
+  usuarios  -> pagamento       [label="registrado_por", arrowhead=crowodot, arrowtail=teeodot, dir=both, style=dashed];
+
+  { rank=same; log_auditoria; sequencia_id; }
+  pagamento -> log_auditoria [style=invis];
+}
