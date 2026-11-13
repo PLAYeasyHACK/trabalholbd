@@ -1,0 +1,6 @@
+backend/out/
+backend/fontes.txt
+*.class
+.DS_Store
+.idea/
+.vscode/
