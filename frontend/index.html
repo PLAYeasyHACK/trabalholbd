@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academia — Sistema de Gestão</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="tela-login" class="login">
+  <form id="form-login" class="login-card">
+    <h1>Academia</h1>
+    <p class="sub">Sistema de gestão de alunos e matrículas</p>
+    <label>Login (alunos usam o CPF)
+      <input name="login" autocomplete="username" required>
+    </label>
+    <label>Senha
+      <input name="senha" type="password" autocomplete="current-password" required>
+    </label>
+    <button type="submit">Entrar</button>
+    <p id="erro-login" class="erro"></p>
+    <details class="dica">
+      <summary>Usuários de teste</summary>
+      <p><b>admin</b> / admin123 — Administrador<br>
+         <b>recepcao</b> / recep123 — Recepção<br>
+         <b>11122233344</b> / aluno123 — Aluno</p>
+    </details>
+  </form>
+</section>
+
+<section id="tela-app" class="app oculto">
+  <header class="topo">
+    <strong class="marca">Academia</strong>
+    <nav id="menu"></nav>
+    <div class="usuario">
+      <span id="usuario-nome"></span>
+      <span id="usuario-grupo" class="tag"></span>
+      <button id="btn-sair" class="sec">Sair</button>
+    </div>
+  </header>
+
+  <main id="conteudo"></main>
+
+  <footer class="rodape">
+    <span>Conexão com o MySQL: <b id="db-usuario">—</b></span>
+    <span>Roles: <b id="db-roles">—</b></span>
+    <span>MySQL <span id="db-versao">—</span></span>
+  </footer>
+</section>
+
+<div id="aviso" class="aviso oculto"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

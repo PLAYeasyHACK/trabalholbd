@@ -1,0 +1,112 @@
+:root {
+  --fundo: #f4f6f8;
+  --card: #ffffff;
+  --texto: #1d2733;
+  --suave: #5d6b7a;
+  --borda: #dfe4ea;
+  --primaria: #1f6feb;
+  --primaria-escura: #1857c1;
+  --ok: #1a7f37;
+  --alerta: #b35900;
+  --perigo: #c62828;
+  --raio: 10px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  font-size: 15px;
+}
+.oculto { display: none !important; }
+
+.login { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
+.login-card {
+  width: 100%; max-width: 360px; background: var(--card); padding: 32px;
+  border-radius: var(--raio); border: 1px solid var(--borda);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.login-card h1 { margin: 0; font-size: 26px; }
+.sub { margin: 0 0 8px; color: var(--suave); }
+.dica { color: var(--suave); font-size: 13px; }
+.dica p { margin: 8px 0 0; line-height: 1.6; }
+
+label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--suave); }
+input, select {
+  font: inherit; color: var(--texto); padding: 8px 10px;
+  border: 1px solid var(--borda); border-radius: 6px; background: #fff;
+}
+input:focus, select:focus { outline: 2px solid var(--primaria); outline-offset: -1px; }
+button {
+  font: inherit; cursor: pointer; border: 0; border-radius: 6px;
+  padding: 8px 14px; background: var(--primaria); color: #fff; font-weight: 600;
+}
+button:hover { background: var(--primaria-escura); }
+button.sec { background: #e9eef5; color: var(--texto); }
+button.sec:hover { background: #dbe3ee; }
+button.perigo { background: var(--perigo); }
+button.mini { padding: 4px 9px; font-size: 13px; }
+.erro { color: var(--perigo); margin: 0; min-height: 1em; font-size: 14px; }
+
+.form-grade {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px; align-items: end;
+}
+
+.topo {
+  display: flex; align-items: center; gap: 24px; padding: 0 24px; height: 58px;
+  background: var(--card); border-bottom: 1px solid var(--borda); position: sticky; top: 0; z-index: 2;
+}
+.marca { font-size: 18px; }
+#menu { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
+#menu a {
+  text-decoration: none; color: var(--suave); padding: 8px 12px; border-radius: 6px; font-weight: 500;
+}
+#menu a.ativo, #menu a:hover { background: #eaf1fd; color: var(--primaria); }
+.usuario { display: flex; align-items: center; gap: 10px; }
+
+main { max-width: 1200px; margin: 0 auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+h2 { margin: 0; font-size: 22px; }
+.card {
+  background: var(--card); border: 1px solid var(--borda); border-radius: var(--raio); padding: 18px;
+}
+.card h3 { margin: 0 0 4px; font-size: 16px; }
+.fonte { font-size: 12px; color: var(--suave); margin: 0 0 12px; }
+.fonte code { background: #eef2f6; padding: 1px 6px; border-radius: 4px; }
+
+.numeros { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.numero { background: var(--card); border: 1px solid var(--borda); border-radius: var(--raio); padding: 16px; }
+.numero .rotulo { color: var(--suave); font-size: 13px; }
+.numero .valor { font-size: 26px; font-weight: 700; margin-top: 4px; }
+
+.tabela-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--borda); white-space: nowrap; }
+th { color: var(--suave); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr:hover { background: #f8fafc; }
+.vazio { color: var(--suave); padding: 16px 0; }
+.acoes { display: flex; gap: 6px; }
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 12px; font-weight: 600; background: #eef2f6; color: var(--suave); }
+.tag.Ativa { background: #e6f4ea; color: var(--ok); }
+.tag.Atrasada { background: #fff1e0; color: var(--alerta); }
+.tag.Cancelada { background: #fdecec; color: var(--perigo); }
+.tag.Suspensa { background: #eef2f6; color: var(--suave); }
+
+.rodape {
+  display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+  padding: 14px; color: var(--suave); font-size: 13px; border-top: 1px solid var(--borda); margin-top: 20px;
+}
+.aviso {
+  position: fixed; bottom: 20px; right: 20px; max-width: 420px; padding: 12px 16px;
+  border-radius: 8px; color: #fff; background: var(--ok); box-shadow: 0 4px 16px rgba(0,0,0,.15); z-index: 10;
+}
+.aviso.erro-aviso { background: var(--perigo); }
+
+@media (max-width: 760px) {
+  .topo { flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 10px; }
+  main { padding: 16px; }
+}
